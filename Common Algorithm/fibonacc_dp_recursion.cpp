@@ -5,14 +5,19 @@ lli fibarray[100000]={0};
 lli comp=0;
 lli fibonacci(lli n)
 {
-    comp++;
+
     if(n==1)
        return 0;
-    if(fibarray[n]!=0)
+    else if(n==2)
+        return 1;
+    else if(fibarray[n]!=0)
         return fibarray[n];
     else
+    {
+        comp++;
         fibarray[n]=fibonacci(n-1)+fibonacci(n-2);
-    return fibonacci(n-1)+fibonacci(n-2);
+        return fibarray[n];
+    }
 
 }
 
