@@ -22,6 +22,6 @@ ll power(ll a,ll n)
 }
 int main()
 {
-    cout<<power(5,100000);
+    cout<<power(5,1000000);
     return 0;
 }
