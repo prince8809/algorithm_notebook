@@ -1,1 +1,1 @@
-# algorith_notebook
+# algorithm_notebook
