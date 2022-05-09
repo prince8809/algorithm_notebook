@@ -1,122 +1,80 @@
-    #include<bits/stdc++.h>
-    using namespace std;
-    class node
+
+#include<bits/stdc++.h>
+using namespace std;
+class node
+{
+    public:
+    int data;
+    node* left;
+    node* right;
+    node(int data)
     {
-        public:
-        int data;
-        node *next;
-        node(int data)
+        this->data=data;
+        this->left=NULL;
+        this->right=NULL;
+
+    }
+};
+class bst
+{
+public:
+     node* root=NULL;
+     node* insertdata(node *curr,int data)
+     {
+        if(curr==NULL)
         {
-            this->data=data;
-            this->next=NULL;
-             }
-    };
-    class l_list
-    {
-        public:
-        node *head=NULL;
-        void insert_append(int data)
+            return new node(data);
+        }
+        else
         {
-            node *temp=new node(data);
-            if(head==NULL)
-              head=temp;
+            if(data<=curr->data)
+            {
+                curr->left=insertdata(curr->left,data);
+            }
             else
             {
-
-                node *current=head;
-                while(current->next!=NULL)
-                    current=current->next;
-                current->next=temp;
-
+                curr->right=insertdata(curr->right,data);
             }
+            return curr;
         }
-        void display()
+      }
+      void display(node *helper)
+       {
+       if(helper==NULL)
+        return;
+       display(helper->left);
+       cout<<helper->data<<" ";
+       display(helper->right);
+       }
+};
+int main()
+{
+    bst newtree;
+    newtree.root=newtree.insertdata(newtree.root,5);
+    newtree.insertdata(newtree.root,3);
+    newtree.insertdata(newtree.root,2);
+    newtree.insertdata(newtree.root,4);
+    newtree.insertdata(newtree.root,7);
+    newtree.insertdata(newtree.root,6);
+    newtree.insertdata(newtree.root,8);
+    newtree.display(newtree.root);
+}
+node* insertdata(node *curr,int data)
+     {
+        if(curr==NULL)
         {
-            node *curr=head;
-            while(curr!=NULL)
+            return new node(data);
+        }
+        else
+        {
+            if(data<=curr->data)
             {
-                cout<<curr->data<<" ";
-                curr=curr->next;
+                curr->left=insertdata(curr->left,data);
             }
+            else
+            {
+                curr->right=insertdata(curr->right,data);
+            }
+            return curr;
         }
-        void delete_front()
-        {
-          node *curr=head;
-          head=head->next;
-          free(head);
-        }
-        void delete_back()
-        {
-            node *current=head;
-            while(current->next->next!=NULL)
-                current=current->next;
-            node *temp=current->next;
-            current->next=NULL;
-            free(temp);
-        }
-        void delete_specific(int key)
-        {
-            node *current=head;
-            while(current->next->data!=key)
-                current=current->next;
-            node *temp=current->next;
-            current->next=current->next->next;
-            free(temp);
-        }
-        void insert_araay(int key[],int n)
-        {
-         node *current=head;
-           if(current==NULL)
-           {
-               for(int i=0;i<n;i++)
-               {
-                   node *temp=new node(key[i]);
-                   if(i==0)
-                   {
-                       head=temp;
-                       current=head;
-                   }
-                   else
-                  {
-                 current->next=temp;
-                 current=current->next;
-                  }
-                }
-           }
-         else
-         {
-         while(current->next!=NULL)
-         {
-             current=current->next;
-         }
-         for(int i=0;i<n;i++)
-               {
-                   node *temp=new node(key[i]);
-                   current->next=temp;
-                   current=current->next;
-         }
-         }
-
-        }
-    };
-    int main()
-    {
-
-        l_list a;
-        int arr[5]={15,25,35,45,55};
-        a.insert_append(1);
-        a.insert_append(2);
-        a.insert_append(3);
-        a.insert_append(4);
-        a.insert_append(5);
-        a.insert_append(6);
-        a.insert_append(7);
-        a.insert_append(8);
-        a.insert_append(9);
-        a.insert_append(10);
-        a.delete_front();
-        a.delete_back();
-        a.delete_specific(7);
-        a.insert_araay(arr,5);
-        a.display();
-    }
+      }
