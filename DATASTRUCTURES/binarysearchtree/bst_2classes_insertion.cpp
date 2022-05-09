@@ -1,3 +1,4 @@
+
 #include<bits/stdc++.h>
 using namespace std;
 class node
@@ -18,20 +19,24 @@ class bst
 {
 public:
      node* root=NULL;
-     node* insertdata(node *root,int data)
+     node* insertdata(node *curr,int data)
      {
-        if(root==NULL)
+        if(curr==NULL)
         {
             return new node(data);
         }
-            else if(data<=root->data)
+        else
+        {
+            if(data<=curr->data)
             {
-                root->left=insertdata(root->left,data);
+                curr->left=insertdata(curr->left,data);
             }
             else
             {
-                root->right=insertdata(root->right,data);
+                curr->right=insertdata(curr->right,data);
             }
+            return curr;
+        }
       }
       void display(node *helper)
        {
@@ -54,5 +59,3 @@ int main()
     newtree.insertdata(newtree.root,8);
     newtree.display(newtree.root);
 }
-
-
